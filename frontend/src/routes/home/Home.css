@@ -1,0 +1,47 @@
+.main-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  margin: 40px;
+}
+
+.search-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  margin-top: 1cm;
+  margin-bottom: 1cm;
+  width: 80%;
+}
+
+#search-input {
+  width: 100%;
+  margin-right: 10px;
+  padding-left: 30px;
+  min-height: 40px;
+  box-sizing: border-box;
+  max-height: 40px;
+}
+
+#search-tag {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 38px;
+  max-height: 38px;
+}
+
+#search-tag .select-wrapper {
+  margin-left: 100px;
+}
+
+.cats-box {
+  padding: 10px;
+}

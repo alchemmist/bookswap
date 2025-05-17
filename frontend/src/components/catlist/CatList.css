@@ -1,0 +1,12 @@
+.cat-list-block {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    justify-content: center;
+}
+
+.cat-list-block .cat-card {
+    margin-bottom: 20px;
+    margin: 10px;
+}

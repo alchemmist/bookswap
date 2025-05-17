@@ -1,0 +1,44 @@
+nav {
+  background-color: #f4b9c2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+nav div {
+  margin: 10px;
+}
+
+a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.main-side a {
+  margin-right: 10px;
+}
+
+.profile-side a {
+  display: flex;
+  align-items: center;
+}
+
+.profile-side a img {
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.profile-side a {
+  color: black;
+  font-weight: normal;
+}
+
+.disabled-link {
+  pointer-events: none;
+}
