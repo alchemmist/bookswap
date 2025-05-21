@@ -12,7 +12,6 @@ import axios from "axios"; // Добавляем импорт axios
 import "./App.css";
 
 function App() {
-  const [tags, setTags] = useState([]);
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
@@ -38,8 +37,6 @@ function App() {
       .filter((tag, i, arr) => arr.indexOf(tag) === i);
 
     uniqueTags.unshift("-"); // Добавляем дефис как первичный вариант
-
-    setTags(uniqueTags);
   }, [books]); // Этот эффект зависит от books
 
   return (

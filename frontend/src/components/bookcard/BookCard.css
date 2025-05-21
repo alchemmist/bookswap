@@ -26,7 +26,7 @@
 }
 
 .book-card .book-title {
-  margin-top: 10px;
+  margin-top: 0px;
   font-size: 14pt;
   font-weight: bold;
 }
@@ -35,4 +35,63 @@
   color: #000000;
   font-size: 10pt;
   margin-top: 5px;
+}
+
+.unfold-book-box {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: row;
+}
+
+.book-card-unfold {
+  position: fixed;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  padding: 0.5cm;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  border-radius: 20px;
+  width: 25cm;
+  height: 20cm;
+  box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.03);
+  z-index: 20;
+}
+
+#cover-full-preview {
+  height: 10cm;
+  margin: 0 0 1 1cm;
+  object-fit: contain;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+#close-unfold-card {
+  position: fixed;
+  background-color: #ffffff00;
+  border-width: 0;
+  z-index: 50;
+  left: 94.3%;
+  top: 0.5%;
+  cursor: pointer;
+}
+
+#unfolded-title {
+  font-size: 30pt;
+  margin: 0 0 0.3cm 0 !important;
+  text-align: left;
+}
+
+#unfolded-author {
+}
+
+.book-info-container {
+  margin: 0 1cm;
+}
+
+#unfolded-annotation {
 }

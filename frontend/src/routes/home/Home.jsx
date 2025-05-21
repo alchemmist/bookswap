@@ -59,6 +59,7 @@ function Home({ books }) {
                 cover={item.cover}
                 title={item.title}
                 author={item.author}
+                responsabile={item.responsabile}
                 reviews={item.reviews}
               />
             );

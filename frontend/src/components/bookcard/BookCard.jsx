@@ -1,19 +1,12 @@
 import "./BookCard.css";
-import * as catsDB from "../../stores/catsDB";
 import { useState } from "react";
+import Hider from "../hider/Hider";
 
 function BookCard({ id, cover, title, author, reviews }) {
-  const [isFavorite, setIsFavorite] = useState(catsDB.isFavorite(id));
+  const [isUnfold, setIsUnfold] = useState(false);
 
   const handleCardClick = () => {
-    console.log("click")
-    if (catsDB.isFavorite(id)) {
-      catsDB.removeFavorite(id);
-      setIsFavorite(false);
-    } else {
-      catsDB.addFavorite(id);
-      setIsFavorite(true);
-    }
+    setIsUnfold(true);
   };
 
   return (
@@ -23,6 +16,34 @@ function BookCard({ id, cover, title, author, reviews }) {
         <span className="book-title">{title}</span>
         <span className="book-author">{author}</span>
       </div>
+      {isUnfold && (
+        <div className="unfold-book-box">
+          <Hider layout="all" />
+          <div className="book-card-unfold">
+            <button
+              id="close-unfold-card"
+              onClick={() => {
+                setIsUnfold(false);
+              }}
+            >
+              <img src="/src/assets/cross.svg" alt="close" width="45px" />
+            </button>
+            <img alt="книжка" src={cover} id="cover-full-preview" />
+
+            <div className="book-info-container">
+              <h1 id="unfolded-title">{title}</h1>
+              <h2 id="unfolded-author">
+                <span id="unfolded-annotation">Автор: </span>
+                {author}
+              </h2>
+              <h2 id="unfolded-author">
+                <span id="unfolded-annotation">Отзывы: </span>
+                {reviews}
+              </h2>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
