@@ -1,0 +1,18 @@
+stages:
+  - test
+
+test-java-app:
+  stage: test
+  image: gradle:8.13-jdk17
+  tags:
+    - students-buildkit-medium
+  script:
+    - gradle -p backend test --info
+  artifacts:
+    paths:
+      - backend/build/test-results/
+      - backend/build/reports/
+    when: always
+  cache:
+    paths:
+      - backend/.gradle/
