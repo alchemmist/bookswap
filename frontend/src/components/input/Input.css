@@ -1,12 +1,13 @@
 .input {
   padding: 10px;
   margin: 0px;
-  border: solid 1px #feb5c2;
+  border: solid 2px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
-  box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.5s ease-in-out; /* длительность 0.5с, плавная функция */
 }
 
 .input:focus {
-  border: solid 1px #ff68b4;
+  border: solid 2px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.5s ease-in-out; /* длительность 0.5с, плавная функция */
   outline: none;
 }

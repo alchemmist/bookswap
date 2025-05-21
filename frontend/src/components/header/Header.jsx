@@ -1,21 +1,22 @@
 import "./Header.css";
 import { Link } from "react-router";
-import * as auth from "../../stores/auth";
 
 function Header() {
   return (
-    <nav className={!auth.isAuthorized() ? "disabled-link" : ""}>
+    <nav className="header">
       <div className="main-side">
-        <Link to="/main">Главная</Link>
-        <Link to="/favorites">Избранное</Link>
+        <Link to="/main">
+          <button className="tab">Главная</button>
+        </Link>
+        <Link to="/favorites">
+          <button className="tab">Избранное</button>
+        </Link>
       </div>
       <div className="profile-side">
         <Link to="/profile">
-          <img
-            alt="Аватарка"
-            src={localStorage.getItem("userAvatar") || "/src/assets/user.png"}
-          />
-          {auth.isAuthorized() && auth.getAuthLogin()}
+          <button className="tab profile-button">
+            Профиль
+          </button>
         </Link>
       </div>
     </nav>

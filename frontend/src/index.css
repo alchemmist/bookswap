@@ -1,5 +1,6 @@
-html, body {
-  font-family: 'Inter', sans-serif;
+html,
+body {
+  font-family: "Helvetica", sans-serif;
 }
 
 * {
@@ -9,5 +10,5 @@ html, body {
 }
 
 body {
-  background-color: #fae6f0;
+  background-color: white;
 }

@@ -7,7 +7,7 @@ function AuthWrapper({ children }) {
 
   useEffect(() => {
     if (!auth.isAuthorized()) {
-      navigate("/");
+      navigate("/login");
     }
   }, []);
 

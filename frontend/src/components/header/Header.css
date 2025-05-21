@@ -1,19 +1,12 @@
 nav {
-  background-color: #f4b9c2;
+  background-image: url("/src/assets/header-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0px -40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
-}
-
-nav div {
-  margin: 10px;
-}
-
-a {
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
 }
 
 .main-side a {
@@ -35,10 +28,36 @@ a {
 }
 
 .profile-side a {
-  color: black;
+  color: white;
   font-weight: normal;
+  text-decoration: none;
+  font-size: 13pt; 
 }
 
-.disabled-link {
-  pointer-events: none;
+.profile-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header {
+  height: 10vh;
+}
+
+.tab {
+  color: white;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 13pt;
+  margin: 10px;
+  background-color: rgba(0, 0, 0, 0.9);
+  cursor: pointer;
+  padding: 15px 30px;
+  border-radius: 10px;
+  border: 0;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.tab:hover {
+  background-color: rgba(0, 0, 0, 0.5);
 }

@@ -11,10 +11,10 @@
   flex-direction: column;
   align-items: center;
   background-color: white;
-  padding: 35px;
+  padding: 75px;
   text-align: center;
-  border-radius: 5px;
-  box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.03);
 }
 
 h1 {
@@ -30,38 +30,54 @@ h1 {
   cursor: pointer;
 }
 
-/* #login-input { */
-/*   padding: 10px; */
-/*   margin-top: 5px; */
-/*   border: solid 1px #feb5c2; */
-/*   border-radius: 5px; */
-/*   box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1); */
-/* } */
-/**/
-/* #login-input:focus { */
-/*   border: solid 1px #ff68b4; */
-/* } */
-
 #login-page-input {
   width: 100%;
   margin-top: 20px;
 }
 
-#login-button {
-  padding: 10px;
+#register-button {
+  padding: 10px 40px;
+  margin: 3px;
+  font-size: 13pt;
   border: none;
-  border-radius: 25px;
+  border-radius: 10px;
   color: white;
-  width: 100%;
-  background-color: #feb5c2;
+  background-color: #222222;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+#register-button:hover {
+  background-color: #3b3b3b;
+}
+
+#login-button {
+  margin: 3px;
+  padding: 10px 40px;
+  font-size: 13pt;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  background-color: #222222;
   transition: 0.5s;
   cursor: pointer;
 }
 
 #login-button:hover {
-  background-color: #ff68b4;
+  background-color: #3b3b3b;
 }
 
 .copyright-block {
   margin-top: 15px;
+  font-size: 11pt;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+#login-title {
+  font-size: 40pt;
+  font-weight: 940;
+}
+
+.auth-buttons {
+  display: flex;
 }

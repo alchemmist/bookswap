@@ -1,4 +1,3 @@
-import * as auth from "./stores/auth";
 import Home from "./routes/home/Home";
 import Login from "./routes/login/Login";
 import Profile from "./routes/profile/Profile";
@@ -49,9 +48,17 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route
           path="/main"
+          element={
+            <AuthWrapper>
+              <Home cats={cats} tags={tags} />
+            </AuthWrapper>
+          }
+        />
+        <Route
+          path="/"
           element={
             <AuthWrapper>
               <Home cats={cats} tags={tags} />
