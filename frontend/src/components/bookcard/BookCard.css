@@ -1,20 +1,28 @@
 .book-card {
   max-width: 200px;
-  max-height: 300px;
+  max-height: 400px;
+  margin: 20px;
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fef1f5;
+  background-color: rgba(0, 0, 0, 0.08);
   border-radius: 10px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.03);
+  transition: 0.5s;
+}
+
+.book-card:hover {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .book-card img {
-  width: 200px;
-  height: 150px;
-  object-fit: cover;
+  width: 300px;
+  height: 250px;
+  object-fit: contain;
   border-radius: 5px;
+  pointer-events: none;
 }
 
 .book-card .book-title {
@@ -23,20 +31,8 @@
   font-weight: bold;
 }
 
-.book-card .tag-list {
-  color: #ff68b4;
+.book-card .book-author {
+  color: #000000;
   font-size: 10pt;
   margin-top: 5px;
-}
-
-.book-card .mark-favorite {
-    background-color: #ff68b4;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 10pt;
-    padding: 10px;
-    max-width: 150px;
-    margin-top: 10px;
-    cursor: pointer;
 }

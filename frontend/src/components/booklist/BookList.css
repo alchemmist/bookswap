@@ -1,4 +1,4 @@
-.cat-list-block {
+.book-list-block {
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -6,7 +6,7 @@
     justify-content: center;
 }
 
-.cat-list-block .cat-card {
+.book-list-block .cat-card {
     margin-bottom: 20px;
     margin: 10px;
 }

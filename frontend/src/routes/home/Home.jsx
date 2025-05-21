@@ -1,36 +1,31 @@
 import React, { useState, useEffect } from "react";
 
 import Input from "../../components/input/Input";
-import Select from "../../components/select/Select";
 import BookCard from "../../components/bookcard/BookCard";
 import "./Home.css";
 import { useNavigate } from "react-router";
-import CatList from "../../components/catlist/CatList";
+import BookList from "../../components/booklist/BookList";
 
 function Home({ books }) {
   const [displayBooks, setDisplayBooks] = useState(books);
-  const [currentTag, setCurrentTag] = useState("-");
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
   const applySearchSettings = () => {
     let updatedDisplayBooks = [];
     books.map((book, _) => {
-      if (
-        book.name.includes(searchQuery) &&
-        (book.tags.includes(currentTag) || currentTag === "-")
-      ) {
+      if (book.title.includes(searchQuery)) {
         updatedDisplayBooks.push(book);
       }
     });
     setDisplayBooks(updatedDisplayBooks);
   };
 
-  useEffect(applySearchSettings, [books, currentTag, searchQuery]);
+  useEffect(applySearchSettings, [books, searchQuery]);
   useEffect(applySearchSettings, []);
 
   const handleAddBook = () => {
-    navigate("/add-book")
+    navigate("/add-book");
   };
 
   return (
@@ -54,8 +49,8 @@ function Home({ books }) {
           </button>
         </div>
       </div>
-      <div className="cats-box">
-        <CatList>
+      <div className="books-box">
+        <BookList>
           {displayBooks.map((item, index) => {
             return (
               <BookCard
@@ -68,7 +63,7 @@ function Home({ books }) {
               />
             );
           })}
-        </CatList>
+        </BookList>
       </div>
     </>
   );

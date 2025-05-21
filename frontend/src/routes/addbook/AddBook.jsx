@@ -33,7 +33,7 @@ function AddBook() {
       };
 
       await axios.post("/api/books", newBook);
-      navigate("/main");
+      navigate("/home");
     } catch (err) {
       setError("Ошибка при добавлении книги. Попробуйте снова.");
       console.error("Add book error:", err);

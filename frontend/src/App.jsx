@@ -48,7 +48,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route
-          path="/main"
+          path="/home"
           element={
             <AuthWrapper>
               <Home books={books} />

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import BookCard from "../../components/bookcard/BookCard";
-import CatList from "../../components/catlist/CatList";
+import BookList from "../../components/booklist/BookList";
 import { getFavoriteCats } from "../../stores/catsDB";
 import "./Favorites.css";
 
@@ -22,7 +22,7 @@ function Favorites({ cats }) {
             У вас пока нет избранных картинок.
           </span>
         ) : (
-          <CatList>
+          <BookList>
             {favoriteCats.map((cat, index) => {
               return (
                 <BookCard
@@ -37,7 +37,7 @@ function Favorites({ cats }) {
                 />
               );
             })}
-          </CatList>
+          </BookList>
         )}
       </div>
     </>

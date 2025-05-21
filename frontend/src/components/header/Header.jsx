@@ -5,7 +5,7 @@ function Header() {
   return (
     <nav className="header">
       <div className="main-side">
-        <Link to="/main">
+        <Link to="/home">
           <button className="tab">Книги</button>
         </Link>
         <Link to="/shelf">
