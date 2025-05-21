@@ -11,3 +11,4 @@ createRoot(document.getElementById("root")).render(
 
 
 // TODO: set color for message on login page
+// TODO: fix distance between card and cover preview in book card on home page

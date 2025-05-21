@@ -14,7 +14,7 @@ function Home({ books }) {
   const applySearchSettings = () => {
     let updatedDisplayBooks = [];
     books.map((book, _) => {
-      if (book.title.includes(searchQuery)) {
+      if (book.title.toLowerCase().includes(searchQuery.toLowerCase())) {
         updatedDisplayBooks.push(book);
       }
     });
