@@ -14,8 +14,9 @@ func main() {
 	db := data.CreatePGConnection()
 	defer db.Close()
 
-	api.SetupHandlers(db)
+	mux := http.NewServeMux()
+	api.SetupHandlers(mux, db)
 
-	fmt.Println("Server running at http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	fmt.Println("Server running at http://localhost:8081")
+	log.Fatal(http.ListenAndServe(":8081", mux))
 }

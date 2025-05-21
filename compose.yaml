@@ -1,4 +1,23 @@
 services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    networks:
+      - default
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
   auth:
     build: ./auth-service
     ports:
@@ -6,6 +25,11 @@ services:
     env_file: .env
     networks:
       - default
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: on-failure
+
   backend:
     build: ./backend
     ports:
@@ -13,25 +37,30 @@ services:
     env_file: .env
     networks:
       - default
-  postgres:
-    image: postgres:16
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-    volumes:
-      - pg-data:/var/lib/postgresql/data
-    env_file: .env
-    ports:
-      - "5432:5432"
-    networks:
-      - default
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: on-failure
+
   frontend:
     build: ./frontend
     ports:
       - "3000:3000"
     networks:
       - default
+    depends_on:
+      - auth
+      - backend
+    develop:
+      watch:
+        - path: ./frontend
+          target: /app
+          action: sync
+
 
 volumes:
   pg-data:
+
+networks:
+  default:
+    driver: bridge

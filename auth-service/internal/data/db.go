@@ -20,7 +20,8 @@ func buildPGUrl() string {
 	user := dotenv.GetPostgresUser()
 	pass := dotenv.GetPostgresPassword()
 	dbName := dotenv.GetPostgresDatabase()
+	port := dotenv.GetPostgresPort()
 
-	connStr := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable", user, pass, dbName)
+	connStr := fmt.Sprintf("host=postgres port=%s user=%s password=%s dbname=%s sslmode=disable", port, user, pass, dbName)
 	return connStr
 }

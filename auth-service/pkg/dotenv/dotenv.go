@@ -34,3 +34,13 @@ func GetPostgresDatabase() string {
 	}
 	return user
 }
+
+func GetPostgresPort() string {
+	varName := "POSTGRES_PORT"
+	port := os.Getenv(varName)
+	if port == "" {
+		log.Fatalf("%s env variable doesn't set", varName)
+		return ""
+	}
+	return port
+}
