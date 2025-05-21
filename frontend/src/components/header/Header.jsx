@@ -6,17 +6,18 @@ function Header() {
     <nav className="header">
       <div className="main-side">
         <Link to="/main">
-          <button className="tab">Главная</button>
+          <button className="tab">Книги</button>
         </Link>
-        <Link to="/favorites">
-          <button className="tab">Избранное</button>
+        <Link to="/shelf">
+          <button className="tab">Полка</button>
+        </Link>
+        <Link to="/mybooks">
+          <button className="tab">Мои книги</button>
         </Link>
       </div>
       <div className="profile-side">
         <Link to="/profile">
-          <button className="tab profile-button">
-            Профиль
-          </button>
+          <button className="tab profile-button">Профиль</button>
         </Link>
       </div>
     </nav>

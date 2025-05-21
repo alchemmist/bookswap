@@ -1,15 +1,8 @@
-import "./CatCard.css";
+import "./BookCard.css";
 import * as catsDB from "../../stores/catsDB";
 import { useEffect, useState } from "react";
 
-function CatCard({
-  id,
-  imageSrc,
-  catName,
-  tagList,
-  favoriteChanged,
-  setFavoriteChanged,
-}) {
+function BookCard({ id, cover, title, author, reviews }) {
   const [isFavorite, setIsFavorite] = useState(catsDB.isFavorite(id));
 
   useEffect(() => {
@@ -31,10 +24,10 @@ function CatCard({
 
   return (
     <>
-      <div className="cat-card">
-        <img alt="Котик" src={imageSrc} />
-        <span className="cat-name">{catName}</span>
-        <span className="tag-list">{tagList.slice(0, 2).join(", ")}</span>
+      <div className="book-card">
+        <img alt="книжка" src={cover} />
+        <span className="book-title">{title}</span>
+        <span className="tag-list">{author}</span>
         <button className="mark-favorite" onClick={toggleFavorite}>
           {isFavorite ? (
             <span>&#x2605; В избранном</span>
@@ -47,4 +40,4 @@ function CatCard({
   );
 }
 
-export default CatCard;
+export default BookCard;

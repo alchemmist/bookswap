@@ -35,38 +35,6 @@ h1 {
   margin-top: 20px;
 }
 
-#register-button {
-  padding: 10px 40px;
-  margin: 3px;
-  font-size: 13pt;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  background-color: #222222;
-  transition: 0.5s;
-  cursor: pointer;
-}
-
-#register-button:hover {
-  background-color: #3b3b3b;
-}
-
-#login-button {
-  margin: 3px;
-  padding: 10px 40px;
-  font-size: 13pt;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  background-color: #222222;
-  transition: 0.5s;
-  cursor: pointer;
-}
-
-#login-button:hover {
-  background-color: #3b3b3b;
-}
-
 .copyright-block {
   margin-top: 15px;
   font-size: 11pt;

@@ -2,32 +2,41 @@ import React, { useState, useEffect } from "react";
 
 import Input from "../../components/input/Input";
 import Select from "../../components/select/Select";
-import CatCard from "../../components/catcard/CatCard";
+import BookCard from "../../components/bookcard/BookCard";
 import "./Home.css";
+import { useNavigate } from "react-router";
 import CatList from "../../components/catlist/CatList";
 
-function Home({ cats, tags }) {
-  const [displayCats, setDisplayCats] = useState(cats);
+function Home({ books }) {
+  const [displayBooks, setDisplayBooks] = useState(books);
   const [currentTag, setCurrentTag] = useState("-");
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
   const applySearchSettings = () => {
-    let updatedDisplayCats = [];
-    cats.map((cat, index) => {
-      if (cat.name.includes(searchQuery) && (cat.tags.includes(currentTag) || currentTag === "-")) {
-        updatedDisplayCats.push(cat);
+    let updatedDisplayBooks = [];
+    books.map((book, _) => {
+      if (
+        book.name.includes(searchQuery) &&
+        (book.tags.includes(currentTag) || currentTag === "-")
+      ) {
+        updatedDisplayBooks.push(book);
       }
     });
-    setDisplayCats(updatedDisplayCats);
+    setDisplayBooks(updatedDisplayBooks);
   };
 
-  useEffect(applySearchSettings, [cats, currentTag, searchQuery]);
+  useEffect(applySearchSettings, [books, currentTag, searchQuery]);
   useEffect(applySearchSettings, []);
+
+  const handleAddBook = () => {
+    navigate("/add-book")
+  };
 
   return (
     <>
       <div className="main-box">
-        <h1>Поиск картинок</h1>
+        <h1>Книги</h1>
         <div className="search-box">
           <Input
             id="search-input"
@@ -36,25 +45,26 @@ function Home({ cats, tags }) {
             placeholder="Поиск по названию"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <Select
-            id="search-tag"
-            onChange={(e) => setCurrentTag(e.target.value)}
-            options={tags}
-            className="custom-select"
-          />
+          <button
+            className="base-button"
+            id="add-book-button"
+            onClick={handleAddBook}
+          >
+            Добавить книгу
+          </button>
         </div>
       </div>
       <div className="cats-box">
         <CatList>
-          {displayCats.map((item, index) => {
+          {displayBooks.map((item, index) => {
             return (
-              <CatCard
+              <BookCard
                 key={index}
                 id={item.id}
-                imageSrc={"/src/assets/" + item.image}
-                catName={item.name}
-                tagList={item.tags}
-                isFavorite={true}
+                cover={item.cover}
+                title={item.title}
+                author={item.author}
+                reviews={item.reviews}
               />
             );
           })}

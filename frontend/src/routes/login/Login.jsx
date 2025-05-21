@@ -33,7 +33,8 @@ function Login() {
   }, []);
 
   const handleLogin = async (e) => {
-    if (login === "") {
+    if (username === "") {
+      setMessage("Введите логин и пароль")
       return;
     }
 
@@ -131,19 +132,21 @@ function Login() {
               type="text"
               placeholder="Лонгин"
               onChange={(e) => setUsername(e.target.value)}
+              required
             />
             <Input
               id="login-page-input"
-              type="text"
+              type="password"
               placeholder="Пароль"
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
           <div className="auth-buttons">
-            <button id="login-button" onClick={handleLogin}>
+            <button className="base-button" onClick={handleLogin}>
               Войти
             </button>
-            <button id="register-button" onClick={handleRegister}>
+            <button className="base-button" onClick={handleRegister}>
               Зарегистрироваться
             </button>
           </div>

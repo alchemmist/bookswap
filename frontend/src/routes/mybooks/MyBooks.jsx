@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import BookCard from "../../components/bookcard/BookCard";
 import CatList from "../../components/catlist/CatList";
 import { getFavoriteCats } from "../../stores/catsDB";
-import "./Favorites.css";
 
-function Favorites({ cats }) {
+function MyBooks({ cats }) {
   const [favoriteCats, setFavoriteCats] = useState(getFavoriteCats(cats));
   const [favoriteChanged, setFavoriteChanged] = useState(false);
 
@@ -44,4 +43,4 @@ function Favorites({ cats }) {
   );
 }
 
-export default Favorites;
+export default MyBooks;
