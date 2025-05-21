@@ -76,6 +76,7 @@ h1 {
 #login-title {
   font-size: 40pt;
   font-weight: 940;
+  font-family: "Times";
 }
 
 .auth-buttons {

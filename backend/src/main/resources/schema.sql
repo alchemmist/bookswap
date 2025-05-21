@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS users (
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
     is_admin BOOL NOT NULL DEFAULT false,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS books (
@@ -36,10 +36,9 @@ CREATE TABLE IF NOT EXISTS transfers (
     id SERIAL PRIMARY KEY,
     sender UUID NOT NULL REFERENCES users(id),
     receiver UUID REFERENCES users(id),
-    closed BOOL NOT NULL DEFAULT false,
+    is_closed BOOL NOT NULL DEFAULT false,
     place INTEGER NOT NULL REFERENCES places(id),
     book UUID NOT NULL REFERENCES books(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     closed_at TIMESTAMP NOT NULL
 );
-

@@ -1,6 +1,13 @@
 html,
 body {
   font-family: "Helvetica", sans-serif;
+  overflow: auto; /* Still scrollable */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 * {
