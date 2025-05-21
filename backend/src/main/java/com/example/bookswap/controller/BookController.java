@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/books")
+@CrossOrigin(origins = "http://localhost:3000") // Добавьте эту аннотацию
+
 @Tag(name = "Книги", description = "API для управления книгами")
 public class BookController {
     private final BookService bookService;

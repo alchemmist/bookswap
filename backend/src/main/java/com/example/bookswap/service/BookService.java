@@ -26,7 +26,7 @@ public class BookService {
             dto.setTitle(rs.getString("title"));
             dto.setAuthor(rs.getString("author"));
             dto.setCover(rs.getString("cover"));
-            dto.setResponsable((UUID) rs.getObject("responsable"));
+            dto.setResponsabile((String) rs.getObject("responsabile"));
             dto.setCreated_at(rs.getTimestamp("created_at"));
             return dto;
         }
@@ -36,12 +36,10 @@ public class BookService {
      * Create a new book record.
      */
     public void createBook(BookDto book) {
-        String sql = "INSERT INTO books (id, title, author, cover, responsable, created_at) VALUES "
-            + "(?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, book.getId(), book.getTitle(), book.getAuthor(), book.getCover(),
-            book.getResponsable(),
-            book.getCreated_at() != null ? book.getCreated_at()
-                                         : new Timestamp(System.currentTimeMillis()));
+        String sql = "INSERT INTO books (title, author, cover, responsabile) VALUES "
+            + "(?, ?, ?, ?)";
+        jdbcTemplate.update(
+            sql, book.getTitle(), book.getAuthor(), book.getCover(), book.getResponsabile());
     }
 
     /**
@@ -49,7 +47,7 @@ public class BookService {
      */
     public BookDto getBookById(UUID id) {
         String sql =
-            "SELECT id, title, author, cover, responsable, created_at FROM books WHERE id = ?";
+            "SELECT id, title, author, cover, responsabile, created_at FROM books WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new BookRowMapper(), id);
     }
 
@@ -57,7 +55,7 @@ public class BookService {
      * Retrieve all books.
      */
     public List<BookDto> getAllBooks() {
-        String sql = "SELECT id, title, author, cover, responsable, created_at FROM books";
+        String sql = "SELECT id, title, author, cover, responsabile, created_at FROM books";
         return jdbcTemplate.query(sql, new BookRowMapper());
     }
 
@@ -66,9 +64,9 @@ public class BookService {
      */
     public int updateBook(BookDto book) {
         String sql =
-            "UPDATE books SET title = ?, author = ?, cover = ?, responsable = ? WHERE id = ?";
+            "UPDATE books SET title = ?, author = ?, cover = ?, responsabile = ? WHERE id = ?";
         return jdbcTemplate.update(sql, book.getTitle(), book.getAuthor(), book.getCover(),
-            book.getResponsable(), book.getId());
+            book.getResponsabile(), book.getId());
     }
 
     /**

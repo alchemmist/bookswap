@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS books (
     title TEXT NOT NULL,
     author TEXT NOT NULL,
     cover TEXT,
-    responsable UUID NOT NULL REFERENCES users(id),
+    responsabile TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

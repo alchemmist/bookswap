@@ -71,13 +71,9 @@ public class UserService {
      * Обновить пользователя
      */
     public void updateUser(UserDto user) {
-        String sql = "" "
-            UPDATE users SET username =
-                ?,
-               password = ?,
-               is_admin = ? WHERE id = ? "" ";
-                                         jdbcTemplate.update(sql, user.getUsername(),
-                                             user.getPassword(), user.getIs_admin(), user.getId());
+        String sql = "UPDATE users SET username = ?, password = ?, is_admin = ? WHERE id = ? ";
+        jdbcTemplate.update(
+            sql, user.getUsername(), user.getPassword(), user.getIs_admin(), user.getId());
     }
 
     /**
