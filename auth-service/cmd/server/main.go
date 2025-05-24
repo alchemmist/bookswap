@@ -3,6 +3,7 @@ package main
 import (
 	"bookswap-auth/internal/api"
 	"bookswap-auth/internal/data"
+	startertoolkit "bookswap-auth/internal/starter-toolkit"
 	"fmt"
 	"log"
 	"net/http"
@@ -18,5 +19,6 @@ func main() {
 	api.SetupHandlers(mux, db)
 
 	fmt.Println("Server running at http://localhost:8081")
+	startertoolkit.InitRootUser(db)
 	log.Fatal(http.ListenAndServe(":8081", mux))
 }
