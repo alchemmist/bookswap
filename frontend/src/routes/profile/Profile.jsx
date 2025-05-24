@@ -38,7 +38,6 @@ function Profile() {
 
   const handleLogout = () => {
     setLogin("");
-    localStorage.removeItem("userAvatar");
     auth.logout();
     navigate("/");
     window.location.reload();

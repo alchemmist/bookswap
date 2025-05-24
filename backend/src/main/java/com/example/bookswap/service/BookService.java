@@ -26,7 +26,7 @@ public class BookService {
             dto.setTitle(rs.getString("title"));
             dto.setAuthor(rs.getString("author"));
             dto.setCover(rs.getString("cover"));
-            dto.setResponsabile((String) rs.getObject("responsabile"));
+            dto.setResponsabile((UUID) rs.getObject("responsabile"));
             dto.setCreated_at(rs.getTimestamp("created_at"));
             return dto;
         }

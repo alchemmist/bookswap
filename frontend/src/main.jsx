@@ -6,9 +6,9 @@ import App from "./App.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <App />
-  </StrictMode>
+  </StrictMode>,
 );
-
 
 // TODO: set color for message on login page
 // TODO: fix distance between card and cover preview in book card on home page
+// TODO: sort reviewss by created at

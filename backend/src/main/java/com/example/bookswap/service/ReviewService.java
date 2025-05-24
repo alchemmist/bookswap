@@ -33,11 +33,20 @@ public class ReviewService {
     }
 
     /**
+     * Получение отзывов для конкретной книги.
+     */
+    public List<ReviewDto> getReviewsForBook(UUID bookId) {
+        String sql = "SELECT id, content, stars, reviewer, book, created_at "
+            + "FROM reviews WHERE book = ?";
+        return jdbcTemplate.query(sql, new ReviewRowMapper(), bookId);
+    }
+
+    /**
      * Создание нового отзыва.
      */
     public void createReview(ReviewDto review) {
-        String sql = "INSERT INTO reviews (content, stars, reviewer, book, created_at) VALUES (?, "
-                     + "?, ?, ?, ?)";
+        String sql = "INSERT INTO reviews (content, stars, reviewer, book, created_at) "
+            + "VALUES (?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, review.getContent(), review.getStars(), review.getReviewer(),
             review.getBook(),
             review.getCreated_at() != null ? review.getCreated_at()
@@ -48,8 +57,8 @@ public class ReviewService {
      * Получение отзыва по ID.
      */
     public ReviewDto getReviewById(int id) {
-        String sql =
-            "SELECT id, content, stars, reviewer, book, created_at FROM reviews WHERE id = ?";
+        String sql = "SELECT id, content, stars, reviewer, book, created_at "
+            + "FROM reviews WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new ReviewRowMapper(), id);
     }
 

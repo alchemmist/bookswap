@@ -2,7 +2,7 @@ import "./AddBook.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { getAuthLogin } from "../../stores/auth";
+import { getAuthId } from "../../stores/auth";
 
 function AddBook() {
   const [title, setTitle] = useState("");
@@ -29,11 +29,11 @@ function AddBook() {
         title,
         author,
         cover,
-        responsabile: getAuthLogin(),
+        responsabile: getAuthId(),
       };
-
       await axios.post("/api/books", newBook);
       navigate("/home");
+      window.location.reload();
     } catch (err) {
       setError("Ошибка при добавлении книги. Попробуйте снова.");
       console.error("Add book error:", err);

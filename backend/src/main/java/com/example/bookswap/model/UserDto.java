@@ -18,6 +18,8 @@ public class UserDto {
 
     private String password;
 
+    private String avatar;
+
     private Boolean is_admin;
 
     private Timestamp created_at;

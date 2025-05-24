@@ -1,0 +1,17 @@
+.reviews-list-block {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  padding: 5px;
+  overflow: auto; /* Still scrollable */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.reviews-list-block::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

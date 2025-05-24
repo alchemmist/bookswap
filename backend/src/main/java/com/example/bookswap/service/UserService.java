@@ -3,7 +3,6 @@ package com.example.bookswap.service;
 import com.example.bookswap.model.UserDto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -26,6 +25,7 @@ public class UserService {
             dto.setId(rs.getObject("id", UUID.class));
             dto.setUsername(rs.getString("username"));
             dto.setPassword(rs.getString("password")); // Осторожно с передачей пароля!
+            dto.setAvatar(rs.getString("avatar"));
             dto.setIs_admin(rs.getBoolean("is_admin"));
             dto.setCreated_at(rs.getTimestamp("created_at"));
             return dto;
@@ -71,9 +71,10 @@ public class UserService {
      * Обновить пользователя
      */
     public void updateUser(UserDto user) {
-        String sql = "UPDATE users SET username = ?, password = ?, is_admin = ? WHERE id = ? ";
-        jdbcTemplate.update(
-            sql, user.getUsername(), user.getPassword(), user.getIs_admin(), user.getId());
+        String sql =
+            "UPDATE users SET username = ?, password = ?, avatar = ?, is_admin = ? WHERE id = ? ";
+        jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getAvatar(),
+            user.getIs_admin(), user.getId());
     }
 
     /**

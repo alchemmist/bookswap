@@ -20,7 +20,7 @@ public class BookDto {
 
     private String cover;
 
-    private String responsabile;
+    private UUID responsabile;
 
     private Timestamp created_at;
 }

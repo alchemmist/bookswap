@@ -60,7 +60,6 @@ function Home({ books }) {
                 title={item.title}
                 author={item.author}
                 responsabile={item.responsabile}
-                reviews={item.reviews}
               />
             );
           })}

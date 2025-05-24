@@ -4,7 +4,7 @@ import com.example.bookswap.model.ReviewDto;
 import com.example.bookswap.service.ReviewService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
-import org.springframework.http.HttpStatus;
+import java.util.UUID;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +16,15 @@ public class ReviewController {
 
     public ReviewController(ReviewService reviewService) {
         this.reviewService = reviewService;
+    }
+
+    /**
+     * GET /api/reviews?bookId={bookId} - получить отзывы для конкретной книги
+     */
+    @GetMapping(params = "bookId")
+    public ResponseEntity<List<ReviewDto>> getReviewsByBook(@RequestParam UUID bookId) {
+        List<ReviewDto> reviews = reviewService.getReviewsForBook(bookId);
+        return ResponseEntity.ok(reviews);
     }
 
     /**
@@ -46,7 +55,7 @@ public class ReviewController {
     @PostMapping
     public ResponseEntity<Void> createReview(@RequestBody ReviewDto reviewDto) {
         reviewService.createReview(reviewDto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(201).build();
     }
 
     /**

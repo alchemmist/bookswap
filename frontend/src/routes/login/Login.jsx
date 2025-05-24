@@ -34,7 +34,7 @@ function Login() {
 
   const handleLogin = async (e) => {
     if (username === "") {
-      setMessage("Введите логин и пароль")
+      setMessage("Введите логин и пароль");
       return;
     }
 
@@ -42,7 +42,11 @@ function Login() {
       const response = await login(username, password);
       if (response.status == 200) {
         setMessage("Добро пожаловать!");
-        auth.authorize(username);
+        auth.authorize(
+          username,
+          response.data.user.id,
+          response.data.user.is_admin,
+        );
         navigate("/");
         window.location.reload();
       } else {
@@ -87,7 +91,12 @@ function Login() {
       const response = await register(username, password);
       if (response.status === 201) {
         setMessage("Регистрация успешна! Теперь войдите");
-        auth.authorize(username);
+        auth.authorize(
+          username,
+          response.data.user.id,
+          response.data.user.is_admin,
+        );
+
         navigate("/");
         window.location.reload();
       }
