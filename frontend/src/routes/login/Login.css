@@ -50,3 +50,7 @@ h1 {
 .auth-buttons {
   display: flex;
 }
+
+.admin-checkbox {
+  margin-top: 9px;
+}

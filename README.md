@@ -26,22 +26,25 @@ https://git.culab.ru/bsc-development-basics-2nd-semester/dev-basics-2025-longrea
 
 ```mermaid
 erDiagram
-    USERS {
+    users {
         UUID id PK
+        TEXT avatar
         TEXT username
         TEXT password
         BOOL is_admin
         TIMESTAMP created_at
     }
-    BOOKS {
+
+    books {
         UUID id PK
         TEXT title
         TEXT author
         TEXT cover
-        UUID responsable FK
+        UUID responsabile FK
         TIMESTAMP created_at
     }
-    REVIEWS {
+
+    reviews {
         INT id PK
         TEXT content
         INT stars
@@ -49,27 +52,29 @@ erDiagram
         UUID book FK
         TIMESTAMP created_at
     }
-    PLACES {
+
+    places {
         INT id PK
         TEXT title
         TEXT full_address
     }
-    TRANSFERS {
+
+    transfers {
         INT id PK
         UUID sender FK
         UUID receiver FK
-        BOOL closed
+        BOOL is_closed
         INT place FK
         UUID book FK
         TIMESTAMP created_at
         TIMESTAMP closed_at
     }
 
-    USERS ||--o{ BOOKS     : "responsible for"
-    USERS ||--o{ REVIEWS   : "writes"
-    BOOKS ||--o{ REVIEWS   : "has"
-    USERS ||--o{ TRANSFERS : "sends"
-    USERS ||--o{ TRANSFERS : "receives"
-    BOOKS ||--o{ TRANSFERS : "transferred in"
-    PLACES ||--o{ TRANSFERS: "at"
+    users ||--o{ books : has
+    users ||--o{ reviews : writes
+    users ||--o{ transfers : sends
+    users ||--o{ transfers : receives
+    books ||--o{ reviews : receives
+    books ||--o{ transfers : includes
+    places ||--o{ transfers : occurs_at
 ```

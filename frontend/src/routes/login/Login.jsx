@@ -12,16 +12,18 @@ function login(username, password) {
   });
 }
 
-function register(username, password) {
+function register(username, password, is_admin) {
   return axios.post("http://localhost:8081/register", {
     username,
     password,
+    is_admin,
   });
 }
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
   const [message, setMessage] = useState("Авторизуйтесь, чтобы продолжить:");
   const [messageColor, setMessageColor] = useState("#000000");
   const navigate = useNavigate();
@@ -88,7 +90,7 @@ function Login() {
     }
 
     try {
-      const response = await register(username, password);
+      const response = await register(username, password, isAdmin);
       if (response.status === 201) {
         setMessage("Регистрация успешна! Теперь войдите");
         auth.authorize(
@@ -158,6 +160,15 @@ function Login() {
             <button className="base-button" onClick={handleRegister}>
               Зарегистрироваться
             </button>
+          </div>
+          <div className="admin-checkbox">
+            <input
+              type="checkbox"
+              id="admin-check"
+              checked={isAdmin}
+              onChange={(e) => setIsAdmin(e.target.checked)}
+            />
+            <label htmlFor="admin-check">Хочу быть администратором</label>
           </div>
           <span className="copyright-block">
             &copy; Bookswap. Все права защищены.
