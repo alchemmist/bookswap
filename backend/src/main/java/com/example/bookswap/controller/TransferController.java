@@ -58,9 +58,9 @@ public class TransferController {
      * POST /api/transfers - создать новый трансфер
      */
     @PostMapping
-    public ResponseEntity<Void> createTransfer(@RequestBody TransferDto transferDto) {
-        transferService.createTransfer(transferDto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<TransferDto> createTransfer(@RequestBody TransferDto transferDto) {
+        TransferDto created = transferService.createTransfer(transferDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     /**

@@ -11,7 +11,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry
             .addMapping("/**") // Применяем ко всем эндпоинтам
             .allowedOrigins("http://localhost:3000") // Разрешенный origin фронтенда
-            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Разрешенные HTTP-методы
+            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH") // Разрешенные HTTP-методы
             .allowedHeaders("*") // Разрешенные заголовки
             .allowCredentials(true) // Разрешаем куки и авторизацию
             .maxAge(3600); // Время кэширования предварительных запросов

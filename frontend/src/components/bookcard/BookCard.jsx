@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Hider from "../hider/Hider";
 import ReviewForm from "../review-form/ReviewForm";
 import ReviewsList from "../reviews-list/ReviewsList";
@@ -19,11 +19,29 @@ function BookCard({ id, cover, title, author }) {
   const [error, setError] = useState(null);
   const [newTransferPlace, setNewTransferPlace] = useState("");
 
+  const fetchTransfers = async () => {
+    try {
+      const res = await fetch(`/api/transfers/book/${id}`);
+      if (!res.ok) {
+        throw new Error(`Ошибка ${res.status}`);
+      }
+      const data = await res.json();
+      setTransfers(data);
+    } catch (err) {
+      console.error(err);
+      setError("Не удалось загрузить трансферы");
+    } finally {
+      setLoadingTransfers(false);
+    }
+  };
+
   const handleCardClick = async () => {
     setIsUnfold(true);
     setLoadingReviews(true);
     setLoadingTransfers(true);
     setError(null);
+
+    fetchTransfers();
 
     try {
       const res = await fetch(`/api/reviews?bookId=${id}`);
@@ -93,6 +111,10 @@ function BookCard({ id, cover, title, author }) {
   };
 
   const handleNewTransfer = async () => {
+    if (!newTransferPlace) {
+      alert("Выберете место трансфера");
+      return;
+    }
     try {
       const newTransfer = {
         sender: getAuthId(),
@@ -100,7 +122,10 @@ function BookCard({ id, cover, title, author }) {
         is_closed: false,
         book: id,
       };
-      setTransfers((transfers) => [newTransfer, ...transfers]);
+      const res = await axios.post("/api/transfers", newTransfer);
+
+      setTransfers((prev) => [res.data, ...prev]);
+      setNewTransferPlace("");
     } catch (err) {
       console.error(err);
     }
@@ -162,15 +187,17 @@ function BookCard({ id, cover, title, author }) {
 
               {loadingTransfers && <p>Загрузка трансферов…</p>}
               {error && <p className="error">{error}</p>}
-              {!loadingTransfers && !error && transfers.length === 0 && (
-                <p>Пока нет трансферов.</p>
-              )}
+              {!loadingTransfers &&
+                !error &&
+                transfers.filter((t) => !t.is_closed).length === 0 && (
+                  <p>Пока нет трансферов.</p>
+                )}
               {!loadingTransfers && !error && transfers.length > 0 && (
                 <div className="book-transfers-list">
-                  {transfers.map((item) =>
+                  {transfers.map((item, index) =>
                     !item.is_closed ? (
                       <TransferCard
-                        key={item.id}
+                        key={index}
                         id={item.id}
                         sender={item.sender}
                         receiver={item.receiver}

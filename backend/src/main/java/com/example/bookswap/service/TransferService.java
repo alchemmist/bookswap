@@ -36,11 +36,18 @@ public class TransferService {
     /**
      * Создать новый transfer
      */
-    public void createTransfer(TransferDto transfer) {
-        String sql = "INSERT INTO transfers (sender, is_closed, place, book"
-            + ") VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, transfer.getSender(), transfer.getIs_closed(), transfer.getPlace(),
-            transfer.getBook());
+    public TransferDto createTransfer(TransferDto transfer) {
+        String sql = "INSERT INTO transfers (sender, is_closed, place, book) VALUES (?, ?, ?, ?) "
+            + "RETURNING id";
+
+        Integer newId = jdbcTemplate.queryForObject(sql, Integer.class, transfer.getSender(),
+            transfer.getIs_closed(), transfer.getPlace(), transfer.getBook());
+
+        if (newId != null) {
+            transfer.setId(newId);
+        }
+
+        return transfer;
     }
 
     /**
