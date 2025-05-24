@@ -6,14 +6,18 @@ import { getAuthId } from "../../stores/auth";
 import ReviewCard from "../review-card/ReviewCard";
 import TransferCard from "../transfer-card/TransferCard";
 import "./BookCard.css";
+import SelectPlace from "../select-place/SelectPlace";
+import axios from "axios";
 
 function BookCard({ id, cover, title, author }) {
   const [isUnfold, setIsUnfold] = useState(false);
   const [reviews, setReviews] = useState([]);
+  const [places, setPlaces] = useState([]);
   const [transfers, setTransfers] = useState([]);
   const [loadingReviews, setLoadingReviews] = useState(false);
   const [loadingTransfers, setLoadingTransfers] = useState(false);
   const [error, setError] = useState(null);
+  const [newTransferPlace, setNewTransferPlace] = useState("");
 
   const handleCardClick = async () => {
     setIsUnfold(true);
@@ -48,6 +52,18 @@ function BookCard({ id, cover, title, author }) {
     } finally {
       setLoadingTransfers(false);
     }
+
+    try {
+      const res = await fetch(`/api/places`);
+      if (!res.ok) {
+        throw new Error(`Ошибка ${res.status}`);
+      }
+      const data = await res.json();
+      setPlaces(data);
+    } catch (err) {
+      console.error(err);
+      setError("Не удалось загрузить трансферы");
+    }
   };
 
   const handleAddReview = async ({ content, rating }) => {
@@ -74,6 +90,26 @@ function BookCard({ id, cover, title, author }) {
       console.error(err);
       alert("Не удалось отправить отзыв.");
     }
+  };
+
+  const handleNewTransfer = async () => {
+    try {
+      const newTransfer = {
+        sender: getAuthId(),
+        place: newTransferPlace.id,
+        is_closed: false,
+        book: id,
+      };
+      setTransfers((transfers) => [newTransfer, ...transfers]);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const removeTransfer = async (id) => {
+    setTransfers((transfers) =>
+      transfers.filter((transfer) => transfer.id !== id),
+    );
   };
 
   return (
@@ -105,8 +141,24 @@ function BookCard({ id, cover, title, author }) {
                 src={cover ? cover : "https://i.ibb.co/zTmTq8wv/Frame-11-1.png"}
                 id="cover-full-preview"
               />
+              <div id="add-transfer-container">
+                <SelectPlace
+                  selected={newTransferPlace}
+                  options={places}
+                  onSelect={setNewTransferPlace}
+                />
+                <button
+                  className="base-button"
+                  id="add-transfer-btton"
+                  onClick={handleNewTransfer}
+                >
+                  Поделиться
+                </button>
+              </div>
 
-              <h2 id="unfolded-annotation">Трансферы:</h2>
+              <h2 id="unfolded-annotation" style={{ marginBottom: "10px" }}>
+                Трансферы:
+              </h2>
 
               {loadingTransfers && <p>Загрузка трансферов…</p>}
               {error && <p className="error">{error}</p>}
@@ -126,6 +178,7 @@ function BookCard({ id, cover, title, author }) {
                         book={item.book}
                         createdAt={item.created_at}
                         closedAt={item.closed_at}
+                        anihilator={removeTransfer}
                       />
                     ) : null,
                   )}

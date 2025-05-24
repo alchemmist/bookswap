@@ -1,13 +1,13 @@
 .place-item {
   display: flex;
   background-color: rgba(0, 0, 0, 0.1);
-  width: 100%;
+  width: 70%;
   border-radius: 10px;
   transition:
     background-color 0.3s ease-in-out,
     box-shadow 0.3s ease-in-out;
-  margin: 0.5cm 0cm 0.5cm 0cm;
-  padding: 10px;
+  margin: 0.2cm 0cm 0.2cm 0cm;
+  padding: 20px;
   box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.01);
 }
 
@@ -37,4 +37,8 @@
 
 #remove-place-button:hover {
   background-color: rgba(0, 0, 0, 0.25);
+}
+
+.place-info-container h2 {
+  margin-bottom: 10px;
 }

@@ -34,7 +34,7 @@ function MyBooks({ books }) {
   return (
     <>
       <div className="main-box">
-        <h1>Книги</h1>
+        <h1>Мои книги</h1>
         <div className="search-box">
           <Input
             id="search-input"

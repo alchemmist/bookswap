@@ -1,4 +1,3 @@
-import axios from "axios";
 import "./PlaceItem.css";
 
 function PlaceItem({ id, title, fullAddress, removeHandler }) {
@@ -6,7 +5,7 @@ function PlaceItem({ id, title, fullAddress, removeHandler }) {
     <div className="place-item">
       <div id="item-circle" />
       <div className="place-info-container">
-        <h3>{title}</h3>
+        <h2>{title}</h2>
         <span>{fullAddress}</span>
       </div>
       <button id="remove-place-button" onClick={() => removeHandler(id)}>

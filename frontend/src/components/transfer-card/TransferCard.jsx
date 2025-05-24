@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import "./TransferCard.css";
+import axios from "axios";
 
-function TransferCard({ id, sender, receiver, placeId, bookId }) {
+function TransferCard({ id, sender, receiver, placeId, bookId, anihilator }) {
   const [placeTitle, setPlaceTitle] = useState("Загрузка...");
   const [placeFullAddress, setPlaceFullAddress] = useState("Загрузка...");
 
@@ -17,13 +18,27 @@ function TransferCard({ id, sender, receiver, placeId, bookId }) {
       });
   }, [placeId]);
 
+  const handleCloseTransfer = () => {
+    axios.patch(`/api/transfers/${id}/close`);
+    anihilator(id);
+  };
+
   return (
     <div className="transfer-card">
       <div className="transfer-info-container">
         <img src="/src/assets/avatar.svg" alt="аватар" width="45px" />
-        <h3>{placeTitle}</h3>
-        <span id="place-full-address">{placeFullAddress}</span>
+        <div id="place-in-transfer-info">
+          <h3>{placeTitle}</h3>
+          <span id="place-full-address">{placeFullAddress}</span>
+        </div>
       </div>
+      <button
+        className="base-button"
+        id="close-transfer-button"
+        onClick={handleCloseTransfer}
+      >
+        <img src="/src/assets/check.svg" width="27px" />
+      </button>
     </div>
   );
 }

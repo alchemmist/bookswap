@@ -6,7 +6,10 @@
 }
 
 .places-list {
-  width: 63%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 23.5cm;
 }
 
 #place-title-input {
@@ -16,4 +19,3 @@
 #place-full-address-input {
   margin: 5px;
 }
-

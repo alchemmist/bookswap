@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS transfers (
     place INTEGER NOT NULL REFERENCES places(id),
     book UUID NOT NULL REFERENCES books(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    closed_at TIMESTAMP NOT NULL
+    closed_at TIMESTAMP
 );
 
 

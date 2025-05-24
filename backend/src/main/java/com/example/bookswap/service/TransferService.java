@@ -37,13 +37,10 @@ public class TransferService {
      * Создать новый transfer
      */
     public void createTransfer(TransferDto transfer) {
-        String sql = "INSERT INTO transfers (sender, receiver, is_closed, place, book, created_at, "
-            + "closed_at) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, transfer.getSender(), transfer.getReciver(),
-            transfer.getIs_closed(), transfer.getPlace(), transfer.getBook(),
-            transfer.getCreated_at() != null ? transfer.getCreated_at()
-                                             : new Timestamp(System.currentTimeMillis()),
-            transfer.getClosed_at());
+        String sql = "INSERT INTO transfers (sender, is_closed, place, book"
+            + ") VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, transfer.getSender(), transfer.getIs_closed(), transfer.getPlace(),
+            transfer.getBook());
     }
 
     /**

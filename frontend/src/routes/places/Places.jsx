@@ -23,7 +23,7 @@ function Places() {
 
   const handleRemovePlace = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/places/${id}`);
+      await axios.delete(`/api/places/${id}`);
       setPlaces((places) => places.filter((place) => place.id !== id));
     } catch (error) {
       console.log("error while deleting place:", error);
@@ -50,6 +50,7 @@ function Places() {
   return (
     <>
       <div className="place-page-box">
+        <h1>Точки трансферов</h1>
         <div className="places-list">
           {places.map((item) => (
             <PlaceItem
