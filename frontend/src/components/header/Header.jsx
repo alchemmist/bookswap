@@ -1,7 +1,7 @@
 import "./Header.css";
 import { Link } from "react-router";
 
-function Header() {
+function Header({ isAdmin }) {
   return (
     <nav className="header">
       <div className="main-side">
@@ -11,6 +11,11 @@ function Header() {
         <Link to="/my-books">
           <button className="tab">Мои книги</button>
         </Link>
+        {isAdmin ? (
+          <Link to="/add-place">
+            <button className="tab">Точки обмена</button>
+          </Link>
+        ) : null}
       </div>
       <div className="profile-side">
         <Link to="/profile">

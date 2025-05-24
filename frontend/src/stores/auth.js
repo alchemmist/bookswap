@@ -9,7 +9,7 @@ export function logout() {
 }
 
 export function isAdmin() {
-  return localStorage.getItem("is_admin") === true;
+  return localStorage.getItem("is_admin") === 'true';
 }
 
 export function isAuthorized() {

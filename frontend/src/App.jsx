@@ -3,16 +3,18 @@ import Login from "./routes/login/Login";
 import Profile from "./routes/profile/Profile";
 import Header from "./components/header/Header";
 import React, { useState, useEffect } from "react";
-import Favorites from "./routes/favorites/Favorites";
 import MyBooks from "./routes/mybooks/MyBooks";
 import AddBook from "./routes/addbook/AddBook";
+import Places from "./routes/places/Places";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router";
 import AuthWrapper from "./components/authwrapper/AuthWrapper";
 import axios from "axios"; // Добавляем импорт axios
 import "./App.css";
+import { isAdmin } from "./stores/auth";
 
 function App() {
   const [books, setBooks] = useState([]);
+  const [userIsAdmin, setUserIsAdmin] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +28,7 @@ function App() {
       }
     };
     fetchData();
+    setUserIsAdmin(isAdmin());
   }, []); // Пустой массив зависимостей = выполняется только при монтировании
 
   useEffect(() => {
@@ -41,7 +44,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header />
+      <Header isAdmin={userIsAdmin} />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route
@@ -89,6 +92,14 @@ function App() {
           element={
             <AuthWrapper>
               <AddBook />
+            </AuthWrapper>
+          }
+        />
+        <Route
+          path="/add-place"
+          element={
+            <AuthWrapper>
+              <Places />
             </AuthWrapper>
           }
         />

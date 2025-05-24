@@ -1,0 +1,19 @@
+.place-page-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.places-list {
+  width: 63%;
+}
+
+#place-title-input {
+  margin: 5px;
+}
+
+#place-full-address-input {
+  margin: 5px;
+}
+

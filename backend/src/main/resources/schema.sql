@@ -44,3 +44,4 @@ CREATE TABLE IF NOT EXISTS transfers (
     closed_at TIMESTAMP NOT NULL
 );
 
+

@@ -4,6 +4,8 @@ import com.example.bookswap.model.TransferDto;
 import com.example.bookswap.service.TransferService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +40,18 @@ public class TransferController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    /**
+     * GET /api/transfers/book/{bookId} - получить все трансферы по bookId
+     */
+    @GetMapping("/book/{bookId}")
+    public ResponseEntity<List<TransferDto>> getTransfersByBookId(@PathVariable UUID bookId) {
+        List<TransferDto> filtered = transferService.getAllTransfers()
+                                         .stream()
+                                         .filter(t -> bookId.equals(t.getBook()))
+                                         .collect(Collectors.toList());
+        return ResponseEntity.ok(filtered);
     }
 
     /**
