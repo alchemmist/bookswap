@@ -8,10 +8,7 @@ function Header() {
         <Link to="/home">
           <button className="tab">Книги</button>
         </Link>
-        <Link to="/shelf">
-          <button className="tab">Полка</button>
-        </Link>
-        <Link to="/mybooks">
+        <Link to="/my-books">
           <button className="tab">Мои книги</button>
         </Link>
       </div>

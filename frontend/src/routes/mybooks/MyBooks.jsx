@@ -1,43 +1,72 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import Input from "../../components/input/Input";
 import BookCard from "../../components/bookcard/BookCard";
+import { useNavigate } from "react-router";
 import BookList from "../../components/booklist/BookList";
-import { getFavoriteCats } from "../../stores/catsDB";
+import { getAuthId } from "../../stores/auth";
 
-function MyBooks({ cats }) {
-  const [favoriteCats, setFavoriteCats] = useState(getFavoriteCats(cats));
-  const [favoriteChanged, setFavoriteChanged] = useState(false);
+function MyBooks({ books }) {
+  const [displayBooks, setDisplayBooks] = useState(books);
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    setFavoriteCats(getFavoriteCats(cats));
-    console.log(favoriteChanged);
-  }, [cats, favoriteChanged]);
+  const applySearchSettings = () => {
+    let updatedDisplayBooks = [];
+    books.map((book, _) => {
+      if (
+        book.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        book.responsabile === getAuthId()
+      ) {
+        updatedDisplayBooks.push(book);
+      }
+    });
+    setDisplayBooks(updatedDisplayBooks);
+  };
+
+  useEffect(applySearchSettings, [books, searchQuery]);
+  useEffect(applySearchSettings, []);
+
+  const handleAddBook = () => {
+    navigate("/add-book");
+  };
 
   return (
     <>
-      <div className="favorites-block">
-        <h1>Избранное</h1>
-        {favoriteCats.length === 0 ? (
-          <span className="no-favorites-note">
-            У вас пока нет избранных картинок.
-          </span>
-        ) : (
-          <BookList>
-            {favoriteCats.map((cat, index) => {
-              return (
-                <BookCard
-                  key={index}
-                  id={cat.id}
-                  imageSrc={"/src/assets/" + cat.image}
-                  catName={cat.name}
-                  tagList={cat.tags}
-                  isFavorite={true}
-                  favoriteChanged={favoriteChanged}
-                  setFavoriteChanged={setFavoriteChanged}
-                />
-              );
-            })}
-          </BookList>
-        )}
+      <div className="main-box">
+        <h1>Книги</h1>
+        <div className="search-box">
+          <Input
+            id="search-input"
+            type="text"
+            autoFocus
+            placeholder="Поиск по названию"
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button
+            className="base-button"
+            id="add-book-button"
+            onClick={handleAddBook}
+          >
+            Добавить книгу
+          </button>
+        </div>
+      </div>
+      <div className="books-box">
+        <BookList>
+          {displayBooks.map((item, index) => {
+            return (
+              <BookCard
+                key={index}
+                id={item.id}
+                cover={item.cover}
+                title={item.title}
+                author={item.author}
+                responsabile={item.responsabile}
+              />
+            );
+          })}
+        </BookList>
       </div>
     </>
   );

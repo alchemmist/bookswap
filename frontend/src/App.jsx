@@ -64,7 +64,7 @@ function App() {
           path="/shelf"
           element={
             <AuthWrapper>
-              <Favorites books={books} />
+              <MyBooks books={books} />
             </AuthWrapper>
           }
         />
