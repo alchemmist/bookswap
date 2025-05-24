@@ -16,6 +16,11 @@ function Header({ isAdmin }) {
             <button className="tab">Точки обмена</button>
           </Link>
         ) : null}
+        {isAdmin ? (
+          <Link to="/transfers">
+            <button className="tab">Трансферы</button>
+          </Link>
+        ) : null}
       </div>
       <div className="profile-side">
         <Link to="/profile">

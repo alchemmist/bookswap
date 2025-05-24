@@ -11,6 +11,7 @@ import AuthWrapper from "./components/authwrapper/AuthWrapper";
 import axios from "axios"; // Добавляем импорт axios
 import "./App.css";
 import { isAdmin } from "./stores/auth";
+import Transfres from "./routes/transfers/Transfers";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -100,6 +101,14 @@ function App() {
           element={
             <AuthWrapper>
               <Places />
+            </AuthWrapper>
+          }
+        />
+        <Route
+          path="/transfers"
+          element={
+            <AuthWrapper>
+              <Transfres />
             </AuthWrapper>
           }
         />
