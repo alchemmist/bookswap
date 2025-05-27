@@ -9,11 +9,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry
-            .addMapping("/**") // Применяем ко всем эндпоинтам
-            .allowedOrigins("http://localhost:3000") // Разрешенный origin фронтенда
-            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH") // Разрешенные HTTP-методы
-            .allowedHeaders("*") // Разрешенные заголовки
-            .allowCredentials(true) // Разрешаем куки и авторизацию
-            .maxAge(3600); // Время кэширования предварительных запросов
+            .addMapping("/**") 
+            .allowedOrigins("http://localhost:3000")
+            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
+            .allowedHeaders("*") 
+            .allowCredentials(true) 
+            .maxAge(3600); 
     }
 }

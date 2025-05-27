@@ -62,12 +62,12 @@ public class UserController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({org.springframework.dao.EmptyResultDataAccessException.class})
     public void handleNotFound() {
-        // Логирование ошибки
+        
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalArgumentException.class)
     public void handleBadRequest() {
-        // Обработка несоответствия ID
+        
     }
 }

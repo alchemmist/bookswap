@@ -24,7 +24,7 @@ public class UserService {
             UserDto dto = new UserDto();
             dto.setId(rs.getObject("id", UUID.class));
             dto.setUsername(rs.getString("username"));
-            dto.setPassword(rs.getString("password")); // Осторожно с передачей пароля!
+            dto.setPassword(rs.getString("password")); 
             dto.setAvatar(rs.getString("avatar"));
             dto.setIs_admin(rs.getBoolean("is_admin"));
             dto.setCreated_at(rs.getTimestamp("created_at"));

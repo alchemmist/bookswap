@@ -63,6 +63,6 @@ public class PlaceController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(org.springframework.dao.EmptyResultDataAccessException.class)
     public void handleNotFound() {
-        // TODO: add error logging
+        
     }
 }

@@ -22,7 +22,7 @@ public class PlaceService {
             PlaceDto dto = new PlaceDto();
             dto.setId(rs.getInt("id"));
             dto.setTitle(rs.getString("title"));
-            dto.setFull_address(rs.getString("full_address")); // Исправлено на String
+            dto.setFull_address(rs.getString("full_address")); 
             return dto;
         }
     }

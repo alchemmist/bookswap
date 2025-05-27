@@ -68,7 +68,7 @@ public class TransferController {
      */
     @PatchMapping("/{id}/close")
     public ResponseEntity<Void> closeTransfer(@PathVariable int id) {
-        // Получаем текущий трансфер
+        
         TransferDto dto = transferService.getTransferById(id);
         if (dto == null) {
             return ResponseEntity.notFound().build();
