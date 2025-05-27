@@ -22,5 +22,5 @@ public class ReviewDto {
 
     private UUID book;
 
-    private Timestamp created_at;
+    private Timestamp createdAt;
 }

@@ -27,7 +27,7 @@ public class ReviewService {
             dto.setStars(rs.getInt("stars"));
             dto.setReviewer((UUID) rs.getObject("reviewer"));
             dto.setBook((UUID) rs.getObject("book"));
-            dto.setCreated_at(rs.getTimestamp("created_at"));
+            dto.setCreatedAt(rs.getTimestamp("created_at"));
             return dto;
         }
     }
@@ -49,7 +49,7 @@ public class ReviewService {
             + "VALUES (?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, review.getContent(), review.getStars(), review.getReviewer(),
             review.getBook(),
-            review.getCreated_at() != null ? review.getCreated_at()
+            review.getCreatedAt() != null ? review.getCreatedAt()
                                            : new Timestamp(System.currentTimeMillis()));
     }
 

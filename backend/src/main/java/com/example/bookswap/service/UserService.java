@@ -24,10 +24,10 @@ public class UserService {
             UserDto dto = new UserDto();
             dto.setId(rs.getObject("id", UUID.class));
             dto.setUsername(rs.getString("username"));
-            dto.setPassword(rs.getString("password")); 
+            dto.setPassword(rs.getString("password"));
             dto.setAvatar(rs.getString("avatar"));
-            dto.setIs_admin(rs.getBoolean("is_admin"));
-            dto.setCreated_at(rs.getTimestamp("created_at"));
+            dto.setIsAdmin(rs.getBoolean("is_admin"));
+            dto.setCreatedAt(rs.getTimestamp("created_at"));
             return dto;
         }
     }
@@ -47,7 +47,7 @@ public class UserService {
             new UserRowMapper(),
             user.getUsername(),
             user.getPassword(),
-            user.getIs_admin()
+            user.getIsAdmin()
         );
     }
 
@@ -74,15 +74,22 @@ public class UserService {
         String sql =
             "UPDATE users SET username = ?, password = ?, avatar = ?, is_admin = ? WHERE id = ? ";
         jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getAvatar(),
-            user.getIs_admin(), user.getId());
+            user.getIsAdmin(), user.getId());
     }
 
     /**
      * Удалить пользователя по ID
      */
     public void deleteUser(UUID id) {
-        String sql = "DELETE FROM users WHERE id = ?";
-        jdbcTemplate.update(sql, id);
+        String existsSql = "SELECT COUNT(*) FROM users WHERE id = ?";
+        int count = jdbcTemplate.queryForObject(existsSql, Integer.class, id);
+
+        if (count == 0) {
+            throw new EmptyResultDataAccessException("User not found with id: " + id, 1);
+        }
+
+        String deleteSql = "DELETE FROM users WHERE id = ?";
+        jdbcTemplate.update(deleteSql, id);
     }
 
     /**
@@ -95,5 +102,11 @@ public class UserService {
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
+    }
+
+    public boolean userExists(UUID id) {
+        String sql = "SELECT COUNT(*) FROM users WHERE id = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, id);
+        return count != null && count > 0;
     }
 }

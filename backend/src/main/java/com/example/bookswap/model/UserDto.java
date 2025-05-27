@@ -1,5 +1,7 @@
 package com.example.bookswap.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotBlank;
 import java.sql.Timestamp;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -14,13 +16,13 @@ import lombok.Setter;
 public class UserDto {
     private UUID id;
 
-    private String username;
+    @NotBlank private String username;
 
-    private String password;
+    @NotBlank private String password;
 
-    private String avatar;
+    private String avatar = "";
 
-    private Boolean is_admin;
+    @JsonProperty("is_admin") private Boolean isAdmin; 
 
-    private Timestamp created_at;
+    @JsonProperty("created_at") private Timestamp createdAt; 
 }

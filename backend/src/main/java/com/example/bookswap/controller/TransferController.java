@@ -74,7 +74,7 @@ public class TransferController {
             return ResponseEntity.notFound().build();
         }
         dto.setIs_closed(true);
-        dto.setClosed_at(new java.sql.Timestamp(System.currentTimeMillis()));
+        dto.setClosedAt(new java.sql.Timestamp(System.currentTimeMillis()));
         int updated = transferService.updateTransfer(dto);
         if (updated > 0) {
             return ResponseEntity.noContent().build();

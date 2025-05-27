@@ -27,8 +27,8 @@ public class TransferService {
             dto.setIs_closed(rs.getBoolean("is_closed"));
             dto.setPlace(rs.getInt("place"));
             dto.setBook((java.util.UUID) rs.getObject("book"));
-            dto.setCreated_at(rs.getTimestamp("created_at"));
-            dto.setClosed_at(rs.getTimestamp("closed_at"));
+            dto.setCreatedAt(rs.getTimestamp("created_at"));
+            dto.setClosedAt(rs.getTimestamp("closed_at"));
             return dto;
         }
     }
@@ -77,7 +77,7 @@ public class TransferService {
             + "book = ?, closed_at = ? WHERE id = ?";
         return jdbcTemplate.update(sql, transfer.getSender(), transfer.getReciver(),
             transfer.getIs_closed(), transfer.getPlace(), transfer.getBook(),
-            transfer.getClosed_at(), transfer.getId());
+            transfer.getClosedAt(), transfer.getId());
     }
 
     /**

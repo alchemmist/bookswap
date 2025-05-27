@@ -22,6 +22,6 @@ public class BookDto {
 
     private UUID responsabile;
 
-    private Timestamp created_at;
+    private Timestamp createdAt;
 }
 

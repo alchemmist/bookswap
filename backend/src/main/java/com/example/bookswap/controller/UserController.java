@@ -5,6 +5,8 @@ import com.example.bookswap.service.UserService;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
+
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/api/users")
+@ResponseStatus(HttpStatus.BAD_REQUEST)
 public class UserController {
     private final UserService userService;
 
@@ -46,7 +49,11 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable UUID id, @RequestBody UserDto userDto) {
         if (!id.equals(userDto.getId())) {
-            throw new IllegalArgumentException("ID in path and body must match");
+            throw new IllegalArgumentException("ID mismatch");
+        }
+
+        if (!userService.userExists(id)) {
+            throw new EmptyResultDataAccessException("User not found", 1);
         }
 
         userService.updateUser(userDto);
@@ -61,13 +68,9 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({org.springframework.dao.EmptyResultDataAccessException.class})
-    public void handleNotFound() {
-        
-    }
+    public void handleNotFound() {}
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalArgumentException.class)
-    public void handleBadRequest() {
-        
-    }
+    public void handleBadRequest() {}
 }

@@ -24,7 +24,7 @@ public class TransferDto {
 
     private UUID book;
 
-    private Timestamp created_at;
+    private Timestamp createdAt;
 
-    private Timestamp closed_at;
+    private Timestamp closedAt;
 }
