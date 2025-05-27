@@ -1,80 +1,51 @@
-# Bookswap
+<img src="./frontend/public/favicon.ico" alt="Favicon Preview" width="82" height="82" style="margin-bottom: 10px">
 
-[![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?logo=openjdk&logoColor=white)](#)
-![Gradle](https://img.shields.io/badge/Gradle-black?logo=gradle&logoColor=%2302303A&logoSize=auto&label=Build%20system&labelColor=grey&color=%2302303A)
-[![Go](https://img.shields.io/badge/Go-%2300ADD8.svg?&logo=go&logoColor=white)](#)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000)](#)
-[![npm](https://img.shields.io/badge/npm-CB3837?logo=npm&logoColor=fff)](#)
-[![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=fff)](#)
-[![React](https://img.shields.io/badge/React-%2320232a.svg?logo=react&logoColor=%2361DAFB)](#)
-[![Postgres](https://img.shields.io/badge/Postgres-%23316192.svg?logo=postgresql&logoColor=white)](#)
-
+![Last commit](https://img.shields.io/github/last-commit/alchemmist/bookswap?style=flat)
+![Stars](https://img.shields.io/github/stars/alchemmist/bookswap?style=flat)
+![Forks](https://img.shields.io/github/forks/alchemmist/bookswap?style=flat)
+![License](https://img.shields.io/github/license/alchemmist/bookswap?style=flat)
+![Contrebutors](https://img.shields.io/github/contributors/alchemmist/bookswap?style=flat)
+![Neovim](https://img.shields.io/badge/Neovim0.11-default?label=Made%20with)
 [![CU](https://img.shields.io/badge/CenralUniversity-white?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iMzMyIiBoZWlnaHQ9IjMyMSIgdmlld0JveD0iMCAwIDMzMiAzMjEiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI%2BCjxwYXRoIGQ9Ik0zMzEuOTQxIDEzOS41MDRMMjM3LjAyNiAxOTkuOTAyVjMxMi44OTlMMjIzLjM5MyAzMjFMMTQ2LjUxOSAyNzguMzQ2TDE2NC4yODcgMjY3LjA0OUwyMTguNjU3IDI5Ny4xOTNWMjExLjU1N0wxMjkuMDUzIDI2OC42MkwwIDE5Ny40NDlWMTgxLjUyM0w5NC44ODcyIDEyMS4xMjZWOC4xMDEyTDEwOC41MiAwTDIzNi45OTkgNzEuMjUzNVYxNzcuOTk2TDMwOC45MTcgMTMyLjIzTDI1NC40OTMgMTAyLjA4N1Y4MC45NTNMMzMxLjkxMyAxMjMuNTc4TDMzMS45NDEgMTM4LjEyMVYxMzkuNTA0Wk0yMDkuNzYgMTk1LjM1NUwxMDQuNDQxIDEzNi45NjlMMjMuMDIzNiAxODguNzk3TDEwOC41NzUgMjM2LjE5TDEyOC4zOTYgMjQ3LjE1NkwyMDkuNzg2IDE5NS4zNTVIMjA5Ljc2Wk0yMTguNjI5IDgyLjE5MjVMMTEzLjI4NCAyMy43NzkxVjEyMC43MzlMMjE4LjYwMSAxNzkuMTI2VjgyLjE5MjVIMjE4LjYyOVoiIGZpbGw9IiMxNDE0MTQiLz4KPC9zdmc%2BCg%3D%3D&logoSize=auto&label=CU&labelColor=white&color=grey&link=https%3A%2F%2Fcentraluniversity.ru%2F)](https://centraluniversity.ru/)
-[![Neovim](https://img.shields.io/badge/Neovim-57A143?logo=neovim&logoColor=fff)](#)
-![Build Status](https://img.shields.io/github/actions/workflow/status/alchemmist/bookswap/ci.yml?branch=main)
+![Postgres](https://img.shields.io/badge/17.5-default?label=postgres)
+![React](https://img.shields.io/badge/19.0-default?label=React)
+![Java](https://img.shields.io/badge/17-default?label=Java)
+![Gradle](https://img.shields.io/badge/8.14-default?label=gradle)
+![Go](https://img.shields.io/badge/1.24-default?label=go)
+![Vite](https://img.shields.io/badge/6.3-default?label=vite)
+
+Project architect: [@alchemmist](https://github.com/alchemmist)
+
+**Motivation:** Text transmission is the foundation of civilization.
+
+**About:** It's a course project at first course of bachelor in [Central University](https://centraluniversity.ru). This is applicatoin for a free paper book exchange. Admins can add a specific places, at any cities, and the users will say: "Hey! I can give this book in this place". Other user, who want read the book, click to "✓" and making handshake.
 
 
+## System design
 
+In this application we have three main service: [`backend`](./backend) (writen on Java), `frontend` (writen on JavaSctipt), `auth-service` (writen on Go):
 
-It's a course project at first course of bachelor in [Central University]()
-
-## Ссылка на ТЗ:
-
-https://git.culab.ru/bsc-development-basics-2nd-semester/dev-basics-2025-longreads/-/tree/main/course-project?ref_type=heads
-
-# Database
-
-```mermaid
-erDiagram
-    users {
-        UUID id PK
-        TEXT avatar
-        TEXT username
-        TEXT password
-        BOOL is_admin
-        TIMESTAMP created_at
-    }
-
-    books {
-        UUID id PK
-        TEXT title
-        TEXT author
-        TEXT cover
-        UUID responsabile FK
-        TIMESTAMP created_at
-    }
-
-    reviews {
-        INT id PK
-        TEXT content
-        INT stars
-        UUID reviewer FK
-        UUID book FK
-        TIMESTAMP created_at
-    }
-
-    places {
-        INT id PK
-        TEXT title
-        TEXT full_address
-    }
-
-    transfers {
-        INT id PK
-        UUID sender FK
-        UUID receiver FK
-        BOOL is_closed
-        INT place FK
-        UUID book FK
-        TIMESTAMP created_at
-        TIMESTAMP closed_at
-    }
-
-    users ||--o{ books : has
-    users ||--o{ reviews : writes
-    users ||--o{ transfers : sends
-    users ||--o{ transfers : receives
-    books ||--o{ reviews : receives
-    books ||--o{ transfers : includes
-    places ||--o{ transfers : occurs_at
 ```
+bookswap
+├── auth-service
+├── backend
+└── frontend
+```
+
+Auth-service is service for authentication with to basic routes. Using [`crypto`](https://github.com/golang/crypto) for hashing password. Backend is service with main bussines logic. Frontend it's basic React app.
+
+For more information you can check [`docs`](./docs) folder. For example, where you can read [API doc](./docs/api.md) or see database [schema](./docs/database.md).
+
+## Demo
+
+<p align="center">
+    <img src="./images/demo.gif" alt="Demo GIF" width="750">
+</p>
+
+## Questions
+
+If you have a questions about this repo you can write to actual project architect.
+
+## Contributors
+
+- [@alchemmist](https://github.com/alchemmist) as Anton Grishin
