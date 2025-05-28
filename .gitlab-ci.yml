@@ -7,7 +7,25 @@ test-java-app:
   tags:
     - students-buildkit-medium
   script:
-    - gradle -p backend test --info
+    - cd backend
+    - make test
+  artifacts:
+    paths:
+      - backend/build/test-results/
+      - backend/build/reports/
+    when: always
+  cache:
+    paths:
+      - backend/.gradle/
+
+test-go-app:
+  stage: test
+  image: gradle:8.13-jdk17
+  tags:
+    - students-buildkit-medium
+  script:
+    - cd auth-service
+    - make test
   artifacts:
     paths:
       - backend/build/test-results/
