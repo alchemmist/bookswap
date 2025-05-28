@@ -7,28 +7,7 @@ test-java-app:
   tags:
     - students-buildkit-medium
   script:
-    - apt-get update && apt-get install -y make
-    - cd backend
-    - make test
-  artifacts:
-    paths:
-      - backend/build/test-results/
-      - backend/build/reports/
-    when: always
-  cache:
-    paths:
-      - backend/.gradle/
-
-test-go-app:
-  stage: test
-  image: debian:bullseye
-  tags:
-    - students-buildkit-medium
-  script:
-    - apt-get update && apt-get install -y make openjdk-17-jdk curl unzip docker
-    - docker --version
-    - cd auth-service
-    - make 
+    - gradle -p backend test --info
   artifacts:
     paths:
       - backend/build/test-results/
