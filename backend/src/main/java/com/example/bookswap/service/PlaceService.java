@@ -27,41 +27,26 @@ public class PlaceService {
         }
     }
 
-    /**
-     * Получить все места
-     */
     public List<PlaceDto> getAllPlaces() {
         String sql = "SELECT * FROM places";
         return jdbcTemplate.query(sql, new PlaceRowMapper());
     }
 
-    /**
-     * Получить место по ID
-     */
     public PlaceDto getPlaceById(Integer id) {
         String sql = "SELECT * FROM places WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new PlaceRowMapper(), id);
     }
 
-    /**
-     * Создать новое место
-     */
     public void createPlace(PlaceDto place) {
         String sql = "INSERT INTO places (title, full_address) VALUES (?, ?)";
         jdbcTemplate.update(sql, place.getTitle(), place.getFull_address());
     }
 
-    /**
-     * Обновить существующее место
-     */
     public void updatePlace(PlaceDto place) {
         String sql = "UPDATE places SET title = ?, full_address = ? WHERE id = ?";
         jdbcTemplate.update(sql, place.getTitle(), place.getFull_address(), place.getId());
     }
 
-    /**
-     * Удалить место по ID
-     */
     public void deletePlace(Integer id) {
         String sql = "DELETE FROM places WHERE id = ?";
         jdbcTemplate.update(sql, id);

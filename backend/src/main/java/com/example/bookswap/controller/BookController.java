@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/books")
-@CrossOrigin(origins = "http://localhost:3000") 
+@CrossOrigin(origins = "http://localhost:3000")
 
 @Tag(name = "Книги", description = "API для управления книгами")
 public class BookController {
@@ -21,36 +21,24 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    /**
-     * GET /api/books - получить список всех книг
-     */
     @GetMapping
     public ResponseEntity<List<BookDto>> getAllBooks() {
         List<BookDto> books = bookService.getAllBooks();
         return ResponseEntity.ok(books);
     }
 
-    /**
-     * GET /api/books/{id} - получить книгу по ID
-     */
     @GetMapping("/{id}")
     public ResponseEntity<BookDto> getBookById(@PathVariable UUID id) {
         BookDto book = bookService.getBookById(id);
         return ResponseEntity.ok(book);
     }
 
-    /**
-     * POST /api/books - создать новую книгу
-     */
     @PostMapping
     public ResponseEntity<Void> createBook(@RequestBody BookDto bookDto) {
         bookService.createBook(bookDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    /**
-     * PUT /api/books/{id} - обновить существующую книгу
-     */
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateBook(@PathVariable UUID id, @RequestBody BookDto bookDto) {
         bookDto.setId(id);
@@ -62,9 +50,6 @@ public class BookController {
         }
     }
 
-    /**
-     * DELETE /api/books/{id} - удалить книгу по ID
-     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBook(@PathVariable UUID id) {
         int deleted = bookService.deleteBook(id);

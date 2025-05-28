@@ -33,9 +33,6 @@ public class TransferService {
         }
     }
 
-    /**
-     * Создать новый transfer
-     */
     public TransferDto createTransfer(TransferDto transfer) {
         String sql = "INSERT INTO transfers (sender, is_closed, place, book) VALUES (?, ?, ?, ?) "
             + "RETURNING id";
@@ -50,28 +47,18 @@ public class TransferService {
         return transfer;
     }
 
-    /**
-     * Получить transfer по ID
-     */
     public TransferDto getTransferById(int id) {
         String sql = "SELECT id, sender, receiver, is_closed, place, book, created_at, closed_at "
             + "FROM transfers WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new TransferRowMapper(), id);
     }
 
-    /**
-     * Получить все transfers
-     */
     public List<TransferDto> getAllTransfers() {
         String sql = "SELECT id, sender, receiver, is_closed, place, book, created_at, closed_at "
             + "FROM transfers";
         return jdbcTemplate.query(sql, new TransferRowMapper());
     }
 
-    /**
-     * Обновить существующий transfer
-     * @return количество обновленных записей
-     */
     public int updateTransfer(TransferDto transfer) {
         String sql = "UPDATE transfers SET sender = ?, receiver = ?, is_closed = ?, place = ?, "
             + "book = ?, closed_at = ? WHERE id = ?";
@@ -80,10 +67,6 @@ public class TransferService {
             transfer.getClosedAt(), transfer.getId());
     }
 
-    /**
-     * Удалить transfer по ID
-     * @return количество удаленных записей
-     */
     public int deleteTransfer(int id) {
         String sql = "DELETE FROM transfers WHERE id = ?";
         return jdbcTemplate.update(sql, id);

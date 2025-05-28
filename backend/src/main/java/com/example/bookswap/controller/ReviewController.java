@@ -18,27 +18,18 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    /**
-     * GET /api/reviews?bookId={bookId} - получить отзывы для конкретной книги
-     */
     @GetMapping(params = "bookId")
     public ResponseEntity<List<ReviewDto>> getReviewsByBook(@RequestParam UUID bookId) {
         List<ReviewDto> reviews = reviewService.getReviewsForBook(bookId);
         return ResponseEntity.ok(reviews);
     }
 
-    /**
-     * GET /api/reviews - получить список всех отзывов
-     */
     @GetMapping
     public ResponseEntity<List<ReviewDto>> getAllReviews() {
         List<ReviewDto> reviews = reviewService.getAllReviews();
         return ResponseEntity.ok(reviews);
     }
 
-    /**
-     * GET /api/reviews/{id} - получить отзыв по ID
-     */
     @GetMapping("/{id}")
     public ResponseEntity<ReviewDto> getReviewById(@PathVariable int id) {
         ReviewDto review = reviewService.getReviewById(id);
@@ -49,18 +40,12 @@ public class ReviewController {
         }
     }
 
-    /**
-     * POST /api/reviews - создать новый отзыв
-     */
     @PostMapping
     public ResponseEntity<Void> createReview(@RequestBody ReviewDto reviewDto) {
         reviewService.createReview(reviewDto);
         return ResponseEntity.status(201).build();
     }
 
-    /**
-     * PUT /api/reviews/{id} - обновить существующий отзыв
-     */
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateReview(
         @PathVariable int id, @RequestBody ReviewDto reviewDto) {
@@ -73,9 +58,6 @@ public class ReviewController {
         }
     }
 
-    /**
-     * DELETE /api/reviews/{id} - удалить отзыв по ID
-     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteReview(@PathVariable int id) {
         int deleted = reviewService.deleteReview(id);

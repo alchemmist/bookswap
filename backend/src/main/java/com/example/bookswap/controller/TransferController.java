@@ -20,18 +20,12 @@ public class TransferController {
         this.transferService = transferService;
     }
 
-    /**
-     * GET /api/transfers - получить список всех трансферов
-     */
     @GetMapping
     public ResponseEntity<List<TransferDto>> getAllTransfers() {
         List<TransferDto> list = transferService.getAllTransfers();
         return ResponseEntity.ok(list);
     }
 
-    /**
-     * GET /api/transfers/{id} - получить трансфер по ID
-     */
     @GetMapping("/{id}")
     public ResponseEntity<TransferDto> getTransferById(@PathVariable int id) {
         TransferDto dto = transferService.getTransferById(id);
@@ -42,9 +36,6 @@ public class TransferController {
         }
     }
 
-    /**
-     * GET /api/transfers/book/{bookId} - получить все трансферы по bookId
-     */
     @GetMapping("/book/{bookId}")
     public ResponseEntity<List<TransferDto>> getTransfersByBookId(@PathVariable UUID bookId) {
         List<TransferDto> filtered = transferService.getAllTransfers()
@@ -54,21 +45,14 @@ public class TransferController {
         return ResponseEntity.ok(filtered);
     }
 
-    /**
-     * POST /api/transfers - создать новый трансфер
-     */
     @PostMapping
     public ResponseEntity<TransferDto> createTransfer(@RequestBody TransferDto transferDto) {
         TransferDto created = transferService.createTransfer(transferDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
-    /**
-     * PATCH /api/transfers/{id}/close - закрыть трансфер
-     */
     @PatchMapping("/{id}/close")
     public ResponseEntity<Void> closeTransfer(@PathVariable int id) {
-        
         TransferDto dto = transferService.getTransferById(id);
         if (dto == null) {
             return ResponseEntity.notFound().build();
@@ -83,9 +67,6 @@ public class TransferController {
         }
     }
 
-    /**
-     * DELETE /api/transfers/{id} - удалить трансфер по ID
-     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTransfer(@PathVariable int id) {
         int deleted = transferService.deleteTransfer(id);

@@ -32,9 +32,6 @@ public class UserService {
         }
     }
 
-    /**
-     * Создать нового пользователя
-     */
     public UserDto createUser(UserDto user) {
         String sql = """
             INSERT INTO users (username, password, is_admin) 
@@ -51,25 +48,16 @@ public class UserService {
         );
     }
 
-    /**
-     * Получить всех пользователей
-     */
     public List<UserDto> getAllUsers() {
         String sql = "SELECT * FROM users";
         return jdbcTemplate.query(sql, new UserRowMapper());
     }
 
-    /**
-     * Получить пользователя по ID
-     */
     public UserDto getUserById(UUID id) {
         String sql = "SELECT * FROM users WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new UserRowMapper(), id);
     }
 
-    /**
-     * Обновить пользователя
-     */
     public void updateUser(UserDto user) {
         String sql =
             "UPDATE users SET username = ?, password = ?, avatar = ?, is_admin = ? WHERE id = ? ";
@@ -77,9 +65,6 @@ public class UserService {
             user.getIsAdmin(), user.getId());
     }
 
-    /**
-     * Удалить пользователя по ID
-     */
     public void deleteUser(UUID id) {
         String existsSql = "SELECT COUNT(*) FROM users WHERE id = ?";
         int count = jdbcTemplate.queryForObject(existsSql, Integer.class, id);
@@ -92,9 +77,6 @@ public class UserService {
         jdbcTemplate.update(deleteSql, id);
     }
 
-    /**
-     * Найти пользователя по имени
-     */
     public UserDto findByUsername(String username) {
         String sql = "SELECT * FROM users WHERE username = ?";
         try {

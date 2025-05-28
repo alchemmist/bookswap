@@ -21,10 +21,11 @@ test-java-app:
 
 test-go-app:
   stage: test
-  image: gradle:8.13-jdk17
+  image: debian:bullseye
   tags:
     - students-buildkit-medium
   script:
+    - apt-get update && apt-get install -y make openjdk-17-jdk curl unzip docker
     - docker --version
     - cd auth-service
     - make 

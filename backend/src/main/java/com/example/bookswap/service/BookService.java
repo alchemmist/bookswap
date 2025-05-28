@@ -32,9 +32,6 @@ public class BookService {
         }
     }
 
-    /**
-     * Create a new book record.
-     */
     public void createBook(BookDto book) {
         String sql = "INSERT INTO books (title, author, cover, responsabile) VALUES "
             + "(?, ?, ?, ?)";
@@ -42,26 +39,17 @@ public class BookService {
             sql, book.getTitle(), book.getAuthor(), book.getCover(), book.getResponsabile());
     }
 
-    /**
-     * Retrieve a book by its ID.
-     */
     public BookDto getBookById(UUID id) {
         String sql =
             "SELECT id, title, author, cover, responsabile, created_at FROM books WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new BookRowMapper(), id);
     }
 
-    /**
-     * Retrieve all books.
-     */
     public List<BookDto> getAllBooks() {
         String sql = "SELECT id, title, author, cover, responsabile, created_at FROM books";
         return jdbcTemplate.query(sql, new BookRowMapper());
     }
 
-    /**
-     * Update an existing book record.
-     */
     public int updateBook(BookDto book) {
         String sql =
             "UPDATE books SET title = ?, author = ?, cover = ?, responsabile = ? WHERE id = ?";
@@ -69,9 +57,6 @@ public class BookService {
             book.getResponsabile(), book.getId());
     }
 
-    /**
-     * Delete a book by its ID.
-     */
     public int deleteBook(UUID id) {
         String sql = "DELETE FROM books WHERE id = ?";
         return jdbcTemplate.update(sql, id);
