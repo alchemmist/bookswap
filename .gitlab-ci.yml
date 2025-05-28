@@ -7,6 +7,7 @@ test-java-app:
   tags:
     - students-buildkit-medium
   script:
+    - apt-get update && apt-get install -y make
     - cd backend
     - make test
   artifacts:
@@ -24,8 +25,9 @@ test-go-app:
   tags:
     - students-buildkit-medium
   script:
+    - docker --version
     - cd auth-service
-    - make test
+    - make 
   artifacts:
     paths:
       - backend/build/test-results/
