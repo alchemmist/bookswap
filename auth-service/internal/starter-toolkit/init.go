@@ -1,6 +1,7 @@
 package startertoolkit
 
 import (
+	"bookswap-auth/pkg/dotenv"
 	"database/sql"
 	"log"
 
@@ -8,8 +9,8 @@ import (
 )
 
 func InitRootUser(db *sql.DB) error {
-	const rootUsername = "root"
-	const defaultPassword = "toor"
+	rootUsername := dotenv.GetRootUserLogin()
+	defaultPassword := dotenv.GetPostgresPassword()
 
 	var exists bool
 	err := db.QueryRow(

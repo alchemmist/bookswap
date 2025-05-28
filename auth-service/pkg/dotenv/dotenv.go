@@ -44,3 +44,23 @@ func GetPostgresPort() string {
 	}
 	return port
 }
+
+func GetRootUserLogin() string {
+	varName := "ROOT_USER_LOGIN"
+	port := os.Getenv(varName)
+	if port == "" {
+		log.Fatalf("%s env variable doesn't set", varName)
+		return ""
+	}
+	return port
+}
+
+func GetRootUserPassword() string {
+	varName := "ROOT_USER_PASSWORD"
+	port := os.Getenv(varName)
+	if port == "" {
+		log.Fatalf("%s env variable doesn't set", varName)
+		return ""
+	}
+	return port
+}
