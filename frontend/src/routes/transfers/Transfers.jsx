@@ -7,10 +7,12 @@ function Transfres() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get("/api/transfers")
-      .then(res => {
+    axios
+      .get("/api/transfers")
+      .then((res) => {
         // Показываем только завершённые трансферы (closed_at !== null)
-        const completed = res.data.filter(t => t.closed_at !== null);
+        const completed = res.data.filter((t) => t.closed_at !== null);
+        console.log(completed);
         setTransfers(completed);
       })
       .catch(() => setError("Не удалось загрузить трансферы"))
@@ -19,7 +21,9 @@ function Transfres() {
 
   return (
     <div style={{ maxWidth: 800, margin: "2rem auto", padding: "1rem" }}>
-      <h1 style={{ fontSize: "1.8rem", marginBottom: "1rem" }}>Завершённые трансферы</h1>
+      <h1 style={{ fontSize: "1.8rem", marginBottom: "1rem" }}>
+        Завершённые трансферы
+      </h1>
 
       {loading && <p>Загрузка...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
@@ -30,7 +34,7 @@ function Transfres() {
 
       {!loading && !error && transfers.length > 0 && (
         <ul style={{ listStyle: "none", padding: 0 }}>
-          {transfers.map(t => (
+          {transfers.map((t) => (
             <li
               key={t.id}
               style={{
@@ -40,18 +44,39 @@ function Transfres() {
                 marginBottom: "1rem",
                 boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
                 transition: "box-shadow 0.3s",
-                cursor: "default"
+                cursor: "default",
               }}
-              onMouseEnter={e => e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.15)"}
-              onMouseLeave={e => e.currentTarget.style.boxShadow = "0 1px 3px rgba(0,0,0,0.1)"}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.boxShadow =
+                  "0 4px 12px rgba(0,0,0,0.15)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.boxShadow = "0 1px 3px rgba(0,0,0,0.1)")
+              }
             >
-              <div><strong>ID:</strong> {t.id}</div>
-              <div><strong>Книга ID:</strong> {t.book}</div>
-              <div><strong>Место ID:</strong> {t.place}</div>
-              <div><strong>Отправитель:</strong> {t.sender}</div>
-              <div><strong>Получатель:</strong> {t.receiver || "-"}</div>
-              <div><strong>Создан:</strong> {new Date(t.created_at).toLocaleString()}</div>
-              <div><strong>Завершён:</strong> {new Date(t.closed_at).toLocaleString()}</div>
+              <div>
+                <strong>ID:</strong> {t.id}
+              </div>
+              <div>
+                <strong>Книга ID:</strong> {t.book}
+              </div>
+              <div>
+                <strong>Место ID:</strong> {t.place}
+              </div>
+              <div>
+                <strong>Отправитель:</strong> {t.sender}
+              </div>
+              <div>
+                <strong>Получатель:</strong> {t.receiver || "-"}
+              </div>
+              <div>
+                <strong>Создан:</strong>{" "}
+                {t.createdAt}
+              </div>
+              <div>
+                <strong>Завершён:</strong>{" "}
+                {t.closedAt}
+              </div>
             </li>
           ))}
         </ul>
@@ -61,4 +86,3 @@ function Transfres() {
 }
 
 export default Transfres;
-
