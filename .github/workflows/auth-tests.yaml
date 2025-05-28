@@ -1,0 +1,30 @@
+name: Auth testing
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Compose
+        run: |
+          mv .env.example .env
+          docker compose up -d --build
+
+      - name: Wait for services to be ready
+        run: sleep 15
+
+      - name: Run tests
+        run: |
+          docker-compose exec backend ./gradlew test
+          docker-compose exec auth-service go test ./...
+
+      - name: Tear down services
+        run: docker-compose down

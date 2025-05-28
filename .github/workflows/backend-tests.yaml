@@ -1,4 +1,4 @@
-name: Docker Compose Build
+name: Backend testing
 
 on:
   push:
@@ -16,7 +16,6 @@ jobs:
       - name: Set up Docker Compose
         run: |
           mv .env.example .env
-          docker compose up -d --build
 
       - name: Wait for services to be ready
         run: sleep 15
@@ -28,4 +27,3 @@ jobs:
 
       - name: Tear down services
         run: docker-compose down
-
